@@ -1,4 +1,3 @@
-from urllib.parse import uses_netloc
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
@@ -6,8 +5,8 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import time
 
-path = "C:\\Program Files (x86)\\chromedriver.exe"
-driver = webdriver.Chrome(path)
+driver_path = "C:\\Program Files (x86)\\chromedriver.exe"
+driver = webdriver.Chrome(driver_path)
 
 driver.get("https://www.books.com.tw/")
 print(driver.title)
@@ -25,6 +24,9 @@ try:
     for item in searchlist:
         if "aimer" in str(item.text).lower():
             print(item.text)
+            link = driver.find_element_by_link_text(item.text)
+            link.click()
+    time.sleep(5)
 
 finally:
     driver.quit()
